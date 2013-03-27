@@ -26,15 +26,8 @@ import org.rometools.fetcher.FeedFetcher;
 /**
  * @author Nick Lothian
  */
-public class HttpClientFeedFetcherTest extends AbstractJettyTest {
+public class HttpClientFeedFetcherTest {
 
-	public HttpClientFeedFetcherTest(String s) {
-		super(s);
-	}
-	
-	/**
-	 * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getFeedFetcher()
-	 */
 	protected FeedFetcher getFeedFetcher() {		
 		return new HttpClientFeedFetcher();
 	}
@@ -43,9 +36,6 @@ public class HttpClientFeedFetcherTest extends AbstractJettyTest {
 		return new HttpClientFeedFetcher(cache);
 	}
 
-    /**
-     * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getAuthenticatedFeedFetcher()
-     */
     public FeedFetcher getAuthenticatedFeedFetcher() {
         return new HttpClientFeedFetcher(null, new HttpClientFeedFetcher.CredentialSupplier() {
             public Credentials getCredentials(String realm, String host) {

@@ -1,16 +1,18 @@
 package org.rometools.fetcher.impl;
 
-import org.rometools.fetcher.impl.HashMapFeedInfoCache;
-import org.rometools.fetcher.impl.SyndFeedInfo;
 import java.net.URL;
 
-import junit.framework.TestCase;
+import org.junit.Assert;
+import org.junit.Test;
+import org.rometools.fetcher.impl.HashMapFeedInfoCache;
+import org.rometools.fetcher.impl.SyndFeedInfo;
 
-public class HashMapFeedInfoCacheTest extends TestCase {
+public class HashMapFeedInfoCacheTest {
 
+	@Test
 	public void testRemove() throws Exception {
 		final HashMapFeedInfoCache cache = new HashMapFeedInfoCache();
-		assertNotNull( cache );
+		Assert.assertNotNull( cache );
 		
 		final URL url = new URL("http://foo.com");
 		final SyndFeedInfo syndFeedInfo = new SyndFeedInfo();
@@ -18,13 +20,14 @@ public class HashMapFeedInfoCacheTest extends TestCase {
 		cache.setFeedInfo(url, syndFeedInfo);
 		
 		final SyndFeedInfo returned = cache.remove(url);
-		assertTrue( returned.equals(syndFeedInfo) );
-		assertTrue( url.equals( returned.getUrl() ));
+		Assert.assertTrue( returned.equals(syndFeedInfo) );
+		Assert.assertTrue( url.equals( returned.getUrl() ));
 	}
 	
+	@Test
 	public void testClear() throws Exception {
 		final HashMapFeedInfoCache cache = new HashMapFeedInfoCache();
-		assertNotNull( cache );
+		Assert.assertNotNull( cache );
 		
 		final URL url = new URL("http://foo.com");
 		final SyndFeedInfo syndFeedInfo = new SyndFeedInfo();
@@ -36,6 +39,6 @@ public class HashMapFeedInfoCacheTest extends TestCase {
 		
 		//we should not get a result back
 		final Object returned = cache.getFeedInfo(url);
-		assertTrue( returned == null );
+		Assert.assertTrue( returned == null );
 	}
 }

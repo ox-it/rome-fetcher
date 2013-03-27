@@ -21,15 +21,9 @@ import org.rometools.fetcher.impl.FeedFetcherCache;
 import org.rometools.fetcher.FeedFetcher;
 
 
+
 public class HttpURLFeedFetcherTest extends AbstractJettyTest {
 	
-	public HttpURLFeedFetcherTest(String s) {
-		super(s);
-	}
-
-	/**
-	 * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getFeedFetcher()
-	 */
 	protected FeedFetcher getFeedFetcher() {
 		return new HttpURLFeedFetcher();
 	}		
@@ -38,18 +32,10 @@ public class HttpURLFeedFetcherTest extends AbstractJettyTest {
 		return new HttpURLFeedFetcher(cache);
 	}
 
-    /**
-     * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getAuthenticatedFeedFetcher()
-     */
     public FeedFetcher getAuthenticatedFeedFetcher() {
-        // setup the authenticator
         java.net.Authenticator.setDefault(new TestBasicAuthenticator());
-        
         FeedFetcher feedFetcher = getFeedFetcher();	
-        
         return feedFetcher;
     }
-	
-
 
 }

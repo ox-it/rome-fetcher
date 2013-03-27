@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -43,7 +44,8 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
 
 
-public class FetcherTestServlet extends javax.servlet.http.HttpServlet {
+public class FetcherTestServlet extends HttpServlet {
+	
     public static final String ETAG_1 = "ETAG-1";
     public static final String ETAG_2 = "ETAG-2";
     
@@ -53,11 +55,6 @@ public class FetcherTestServlet extends javax.servlet.http.HttpServlet {
     public static final String SERVLET_MAPPING = "/FetcherTestServlet/*";
     public static final String SERVLET_MAPPING2 = "/FetcherTestServlet2/*";    
     
-	/**
-	 * @throws IOException
-	 * @throws 
-	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if ("TRUE".equalsIgnoreCase(request.getParameter("redirect"))) {
@@ -107,8 +104,6 @@ public class FetcherTestServlet extends javax.servlet.http.HttpServlet {
 		}							
 	}
 
-
-
     private boolean checkModified(HttpServletRequest request, String lastModifiedDate, String eTag) {
 		
 		String requestedETag = request.getHeader("If-None-Match");			
@@ -135,14 +130,6 @@ public class FetcherTestServlet extends javax.servlet.http.HttpServlet {
 		return serveFeed;
 	}
 
-	/**
-     * @param request
-     * @param lastModifiedDate
-     * @param tag
-     * @param gzip
-	 * @throws IOException
-	 * @throws FeedException
-     */
     private void sendDeltaEncodedData(HttpServletResponse response, String lastModifiedDate, String requestedETag, String responseETag, boolean gzip) throws IOException, FeedException {
         if (ETAG_1.equals(requestedETag) || ETAG_2.equals(requestedETag)) {               
 		    OutputStream out = null;

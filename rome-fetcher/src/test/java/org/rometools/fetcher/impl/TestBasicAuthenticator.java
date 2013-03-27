@@ -24,9 +24,6 @@ import java.net.PasswordAuthentication;
  */
 public class TestBasicAuthenticator extends Authenticator {
 
-    /**
-     * @see java.net.Authenticator#getPasswordAuthentication()
-     */
     protected PasswordAuthentication getPasswordAuthentication() {
         if ("localhost".equals(getRequestingHost())) {
             return new PasswordAuthentication("username", "password".toCharArray());
@@ -34,4 +31,5 @@ public class TestBasicAuthenticator extends Authenticator {
             return null;
         }
     }
+
 }

@@ -1,13 +1,16 @@
 package org.rometools.fetcher.impl;
 
+import java.io.File;
+import java.net.URL;
+
+import org.junit.Assert;
+import org.junit.Test;
 import org.rometools.fetcher.impl.DiskFeedInfoCache;
 import org.rometools.fetcher.impl.SyndFeedInfo;
-import java.net.*;
-import java.io.File;
-import junit.framework.TestCase;
 
-public class DiskFeedInfoCacheTest extends TestCase {
+public class DiskFeedInfoCacheTest {
 
+	@Test
 	public void testClear() throws Exception {
 		File cacheDir = new File("test-cache");
 		cacheDir.mkdir();
@@ -20,9 +23,10 @@ public class DiskFeedInfoCacheTest extends TestCase {
 		
 		cache.clear();
 		final Object returned = cache.getFeedInfo(url);
-		assertTrue( returned == null );
+		Assert.assertTrue( returned == null );
 	}
 	
+	@Test
 	public void testRemove() throws Exception {
 		File cacheDir = new File("test-cache");
 		cacheDir.mkdir();
@@ -34,9 +38,9 @@ public class DiskFeedInfoCacheTest extends TestCase {
 		cache.setFeedInfo( url, info );
 		
 		SyndFeedInfo removedInfo = cache.remove( url );
-		assertTrue( removedInfo.equals(info) );
+		Assert.assertTrue( removedInfo.equals(info) );
 		SyndFeedInfo shouldBeNull = cache.remove( url );
-		assertTrue( null == shouldBeNull );	
+		Assert.assertTrue( null == shouldBeNull );	
 	}
 	
 }
