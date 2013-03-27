@@ -38,7 +38,7 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 
 	static HashMapFeedInfoCache _instance;
 	
-	private Map infoCache;
+	private Map<String, SyndFeedInfo> infoCache;
 	
 	/**
 	 * <p>Constructor for HashMapFeedInfoCache</p>
@@ -62,12 +62,12 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 		return _instance;
 	}
 
-	protected Map createInfoCache() {
- 		return (Collections.synchronizedMap(new HashMap()));
+	protected Map<String, SyndFeedInfo> createInfoCache() {
+ 		return (Collections.synchronizedMap(new HashMap<String, SyndFeedInfo>()));
  	}
 
 	
-	protected Object get(Object key) {
+	protected SyndFeedInfo get(String key) {
 		return getInfoCache().get(key);
 	}
 
@@ -75,10 +75,10 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 	 * @see extensions.io.FeedFetcherCache#getFeedInfo(java.net.URL)
 	 */
 	public SyndFeedInfo getFeedInfo(URL feedUrl) {
-		return (SyndFeedInfo) get(feedUrl.toString());
+		return get(feedUrl.toString());
 	}
 
-	protected void put(Object key, Object value) {
+	protected void put(String key, SyndFeedInfo value) {
 		getInfoCache().put(key, value);
 	}
 
@@ -89,7 +89,7 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 		put(feedUrl.toString(), syndFeedInfo);		
 	}
 
-	protected synchronized final Map getInfoCache() {
+	protected synchronized final Map<String, SyndFeedInfo> getInfoCache() {
 		return infoCache;
 	}
 
@@ -100,7 +100,7 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 	 * 
 	 * @param map the map to use as the info cache.
 	 */
-	protected synchronized final void setInfoCache(Map map) {
+	protected synchronized final void setInfoCache(Map<String, SyndFeedInfo> map) {
 		infoCache = map;
 	}
 	
@@ -119,7 +119,7 @@ public class HashMapFeedInfoCache implements FeedFetcherCache, Serializable {
 	public SyndFeedInfo remove( final URL url ) {
 		if( url == null ) return null;
 		
-		return (SyndFeedInfo) infoCache.remove( url.toString() );
+		return infoCache.remove( url.toString() );
 	}
 
 }

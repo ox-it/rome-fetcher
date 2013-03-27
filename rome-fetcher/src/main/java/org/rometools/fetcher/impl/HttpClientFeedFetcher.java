@@ -149,7 +149,7 @@ public class HttpClientFeedFetcher extends AbstractFeedFetcher {
      * @return timeout the read timeout for the URLConnection to a specified timeout, in milliseconds.
      */
     public int getReadTimeout() {
-        return (int) this.getHttpClientParams()
+        return this.getHttpClientParams()
                          .getSoTimeout();
     }
 
@@ -171,8 +171,7 @@ public class HttpClientFeedFetcher extends AbstractFeedFetcher {
         HttpClient client = new HttpClient(httpClientParams);
 
         if (getCredentialSupplier() != null) {
-            client.getState()
-                  .setAuthenticationPreemptive(true);
+            client.getParams().setAuthenticationPreemptive(true);
 
             // TODO what should realm be here?
             Credentials credentials = getCredentialSupplier()
@@ -237,7 +236,6 @@ public class HttpClientFeedFetcher extends AbstractFeedFetcher {
                 return feed;
             } finally {
                 method.releaseConnection();
-                method.recycle();
             }
         } else {
             // cache is not in use		    
@@ -249,7 +247,6 @@ public class HttpClientFeedFetcher extends AbstractFeedFetcher {
                 return getFeed(null, urlStr, method, statusCode);
             } finally {
                 method.releaseConnection();
-                method.recycle();
             }
         }
     }

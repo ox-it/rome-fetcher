@@ -14,14 +14,15 @@ import java.util.Map;
  *
  */
 public class LinkedHashMapFeedInfoCache extends HashMapFeedInfoCache {
-	private final class CacheImpl extends LinkedHashMap {
+	
+	private final class CacheImpl extends LinkedHashMap<String, SyndFeedInfo> {
 		private static final long serialVersionUID = -6977191330127794920L;
 
 		public CacheImpl() {
 			super(16, 0.75F, true);
 		}
 		
-		protected boolean removeEldestEntry(Map.Entry eldest) {
+		protected boolean removeEldestEntry(Map.Entry<String, SyndFeedInfo> eldest) {
 			return size() > getMaxEntries();
 		}
 	}
@@ -55,7 +56,7 @@ public class LinkedHashMapFeedInfoCache extends HashMapFeedInfoCache {
 		super();
 	}
 
-	protected Map createInfoCache() {
+	protected Map<String, SyndFeedInfo> createInfoCache() {
 		return Collections.synchronizedMap(new CacheImpl());
 	}
 

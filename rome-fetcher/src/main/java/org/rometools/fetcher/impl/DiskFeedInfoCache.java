@@ -22,8 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
-import javax.swing.text.Utilities;
+import java.net.URL; 
 
 
 /**
@@ -76,9 +75,9 @@ public class DiskFeedInfoCache implements FeedFetcherCache {
     public static String replaceNonAlphanumeric(String str, char subst) {
         StringBuffer ret = new StringBuffer(str.length());
         char[] testChars = str.toCharArray();
-        for (int i = 0; i < testChars.length; i++) {
-            if (Character.isLetterOrDigit(testChars[i])) {
-                ret.append(testChars[i]);
+        for (char testChar : testChars) {
+            if (Character.isLetterOrDigit(testChar)) {
+                ret.append(testChar);
             } else {
                 ret.append( subst );
             }

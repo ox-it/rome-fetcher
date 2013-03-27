@@ -11,7 +11,7 @@ public class AbstractFeedFetcherBeanInfo extends SimpleBeanInfo {
 
 	public EventSetDescriptor[] getEventSetDescriptors() {
 		try {
-			Class clz = AbstractFeedFetcher.class; // get the class object which we'll describe
+			Class<AbstractFeedFetcher> clz = AbstractFeedFetcher.class; // get the class object which we'll describe
 			Method addMethod = clz.getMethod("addFetcherEventListener", new Class[] { FetcherListener.class });
 			Method removeMethod = clz.getMethod("removeFetcherEventListener", new Class[] { FetcherListener.class });
 			Method listenerMethod = FetcherListener.class.getMethod("fetcherEvent", new Class[] { FetcherEvent.class });

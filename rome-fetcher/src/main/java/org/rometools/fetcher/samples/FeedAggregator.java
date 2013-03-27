@@ -21,12 +21,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
 import org.rometools.fetcher.FeedFetcher;
 import org.rometools.fetcher.impl.FeedFetcherCache;
 import org.rometools.fetcher.impl.HashMapFeedInfoCache;
 import org.rometools.fetcher.impl.HttpURLFeedFetcher;
+
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.SyndFeedOutput;
 
 /**
@@ -55,7 +57,7 @@ public class FeedAggregator {
                 feed.setAuthor("anonymous");
                 feed.setLink("http://www.anonymous.com");
 
-                List entries = new ArrayList();
+                List<SyndEntry> entries = new ArrayList<SyndEntry>();
                 feed.setEntries(entries);
 
 				FeedFetcherCache feedInfoCache = HashMapFeedInfoCache.getInstance();

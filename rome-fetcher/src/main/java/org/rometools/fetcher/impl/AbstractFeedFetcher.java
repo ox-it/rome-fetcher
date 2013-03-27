@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.net.URLConnection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 
@@ -34,15 +33,14 @@ import org.rometools.fetcher.FetcherListener;
 
 
 public abstract class AbstractFeedFetcher implements FeedFetcher {
-	private final Set fetcherEventListeners;
+
+	private final Set<FetcherListener> fetcherEventListeners;
 	private String userAgent;
 	private boolean usingDeltaEncoding;	
 	private boolean preserveWireFeed;
-	
-	
     
 	public AbstractFeedFetcher() {
-		fetcherEventListeners = Collections.synchronizedSet(new HashSet());
+		fetcherEventListeners = Collections.synchronizedSet(new HashSet<FetcherListener>());
 		
 		Properties props = new Properties(System.getProperties());
 		String resourceName = "fetcher.properties";
@@ -116,9 +114,7 @@ public abstract class AbstractFeedFetcher implements FeedFetcher {
 	protected void fireEvent(String eventType, String urlStr, SyndFeed feed) {
 		FetcherEvent fetcherEvent = new FetcherEvent(this, urlStr, eventType, feed);
 		synchronized(fetcherEventListeners) {
-			Iterator iter = fetcherEventListeners.iterator();
-			while ( iter.hasNext()) {
-				FetcherListener fetcherEventListener = (FetcherListener) iter.next();
+			for(FetcherListener fetcherEventListener : fetcherEventListeners) {
 				fetcherEventListener.fetcherEvent(fetcherEvent);							
 			}					
 		}
