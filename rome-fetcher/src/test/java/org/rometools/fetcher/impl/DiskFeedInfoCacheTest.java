@@ -1,4 +1,4 @@
-package org.rometools.test;
+package org.rometools.fetcher.impl;
 
 import org.rometools.fetcher.impl.DiskFeedInfoCache;
 import org.rometools.fetcher.impl.SyndFeedInfo;

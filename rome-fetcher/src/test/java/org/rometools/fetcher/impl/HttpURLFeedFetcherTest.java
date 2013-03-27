@@ -14,47 +14,42 @@
  * limitations under the License.
  *
  */
-package org.rometools.test;
+package org.rometools.fetcher.impl;
 
-import org.rometools.fetcher.impl.HttpClientFeedFetcher;
+import org.rometools.fetcher.impl.HttpURLFeedFetcher;
 import org.rometools.fetcher.impl.FeedFetcherCache;
-import org.apache.commons.httpclient.Credentials;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-
 import org.rometools.fetcher.FeedFetcher;
 
-/**
- * @author Nick Lothian
- */
-public class HttpClientFeedFetcherTest extends AbstractJettyTest {
 
-	public HttpClientFeedFetcherTest(String s) {
+public class HttpURLFeedFetcherTest extends AbstractJettyTest {
+	
+	public HttpURLFeedFetcherTest(String s) {
 		super(s);
 	}
-	
+
 	/**
 	 * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getFeedFetcher()
 	 */
-	protected FeedFetcher getFeedFetcher() {		
-		return new HttpClientFeedFetcher();
-	}
+	protected FeedFetcher getFeedFetcher() {
+		return new HttpURLFeedFetcher();
+	}		
 	
 	protected FeedFetcher getFeedFetcher(FeedFetcherCache cache) {
-		return new HttpClientFeedFetcher(cache);
+		return new HttpURLFeedFetcher(cache);
 	}
 
     /**
      * @see com.sun.syndication.fetcher.impl.AbstractJettyTest#getAuthenticatedFeedFetcher()
      */
     public FeedFetcher getAuthenticatedFeedFetcher() {
-        return new HttpClientFeedFetcher(null, new HttpClientFeedFetcher.CredentialSupplier() {
-            public Credentials getCredentials(String realm, String host) {
-                if ("localhost".equals(host)) {
-                	return new UsernamePasswordCredentials("username", "password");
-                } else {
-                    return null;
-                }                
-            }            
-        }); 
+        // setup the authenticator
+        java.net.Authenticator.setDefault(new TestBasicAuthenticator());
+        
+        FeedFetcher feedFetcher = getFeedFetcher();	
+        
+        return feedFetcher;
     }
+	
+
+
 }
