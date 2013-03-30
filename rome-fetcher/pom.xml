@@ -4,7 +4,7 @@
     <groupId>org.rometools</groupId>
     <artifactId>rome-fetcher</artifactId>
     <name>rome-fetcher</name>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
     <inceptionYear>2004</inceptionYear>
     <description>A well behaved feed fetcher API for ROME</description>
     <url>http://www.rometools.org</url>
