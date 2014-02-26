@@ -26,9 +26,9 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:rometools/rome-fetcher.git</connection>
-        <developerConnection>scm:git:git@github.com:rometools/rome-fetcher.git</developerConnection>
-        <url>https://github.com/rometools/rome-fetcher/</url>
+        <connection>scm:git:git@github.com:ox-it/rome-fetcher.git</connection>
+        <developerConnection>scm:git:git@github.com:ox-it/rome-fetcher.git</developerConnection>
+        <url>https://github.com/ox-it/rome-fetcher/</url>
     </scm>
 
     <licenses>
@@ -57,12 +57,12 @@
 
     <distributionManagement>
         <repository>
-            <id>central.staging</id>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>maven-repo.oucs</id>
+            <url>http://maven-repo.oucs.ox.ac.uk/content/repositories/releases</url>
         </repository>
         <snapshotRepository>
-            <id>sonatype.snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <id>maven-repo.oucs(snapshots)</id>
+            <url>http://maven-repo.oucs.ox.ac.uk/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
